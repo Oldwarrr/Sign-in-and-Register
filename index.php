@@ -4,10 +4,6 @@ include('includes/db.php');
 include('includes/functions.php');
 
 
-
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -40,22 +36,26 @@ include('includes/functions.php');
             $check_password = $result->fetch_assoc();
         
             if($password == $check_password['password']){
-                echo "Вход выполнен успешно";
+                echo "<li>Вход выполнен успешно</li>";
             }else{
-                echo "Неверный пароль";
+                echo "<li>Неверный пароль</li>";
             }
         }else{
-            echo "Такой логин не существует";
+            echo "<li>Такой логин не существует</li>";
         }
     }else{
-        echo "Заполните поля Логин и Пароль";
+        echo "<li>Заполните поля Логин и Пароль</li>";
     }
 }
 
 
 
-?>
 
+
+
+
+?>
+<a href="table.php">Открыть таблицу базы данных.</a>
 
 </body>
 </html>
