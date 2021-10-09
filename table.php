@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('includes/db.php');
 require_once('includes/functions.php');
 $sql = "SELECT * FROM `students`";
@@ -80,6 +81,42 @@ $sql = "SELECT * FROM `students`";
 
 </style>
 
+
+
+
+<!-- Внесли -->
+<?php
+    
+    if(!empty($_POST)){
+        $addName = $_POST['name'];
+        $addAge = $_POST['age'];
+        $addSalary = $_POST['salary'];
+        if(!empty($addName)){
+            $add = $mysql->query("INSERT INTO `students`(name,age,salary) 
+            VALUES(
+            '$addName',
+            '$addAge',
+            '$addSalary'
+            )
+            ");
+            echo "<p style = 'margin-bottom: 20px'>Добавлен 1 человек</p>";
+            header('Location: table.php');
+        }else{
+            echo "<p style = 'margin-bottom: 20px'>Заполните поле Имя</p>";
+            header('Location: table.php');
+        }
+    }else{
+        // echo 'Проверочное сообщение пустого массива $_POST';
+    }
+
+
+
+?>
+
+
+
+
+
 <?php
 if(isset($_GET['del'])){
     $id = (integer)$_GET['id'];
@@ -114,35 +151,10 @@ $result = $mysql->query($sql);
     }
 </script>
 
-<?php
-    
-    if(!empty($_POST)){
-        $addName = $_POST['name'];
-        $addAge = $_POST['age'];
-        $addSalary = $_POST['salary'];
-        if(!empty($addName)){
-            $add = $mysql->query("INSERT INTO `students`(name,age,salary) 
-            VALUES(
-            '$addName',
-            '$addAge',
-            '$addSalary'
-            )
-            ");
-            echo "<p style = 'margin-bottom: 20px'>Добавлен 1 человек</p>";
-        }else{
-            echo "<p style = 'margin-bottom: 20px'>Заполните поле Имя</p>";
-        }
-    }else{
-        // echo 'Проверочное сообщение пустого массива $_POST';
-    }
 
 
-pre($_POST);
 
-
-?>
-
-
+<!-- Вывели -->
 <table>
 
 
@@ -168,15 +180,16 @@ pre($_POST);
             ";
 
         echo "</tr>";
+        
     }
+    
     ?>
 
 </table>
 
-<!-- Корректное удаление, корректное добавление в базу. Некорректный вывод - выводит нормально, но при добавлении нового,
- нужно дополнительно перезагружать страницу, чтобы вывело новую строку таблицы -->
- <!-- При добавлении нового человека, если обновить страницу, то добавляемый человек продублируется повторившись. Присвоение
-массиву $_POST = array() не помогает -->
+<!-- 
+последовательность:
+Отправляется форма - данные добавляются в базу - данные получаются из базы - данные выводятся в браузер -->
 
 
 
