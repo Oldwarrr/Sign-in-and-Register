@@ -99,6 +99,7 @@ $sql = "SELECT * FROM `students`";
             '$addSalary'
             )
             ");
+            $_SESSION['alert'] = 'Добавлен 1 человек';
             echo "<p style = 'margin-bottom: 20px'>Добавлен 1 человек</p>";
             header('Location: table.php');
         }else{
@@ -127,6 +128,24 @@ if(isset($_GET['del'])){
 
 
 $result = $mysql->query($sql);
+
+
+
+
+// НЕ РАБОТАЕТ
+
+
+// if(isset($_SESSION['alert'])){
+//     if($_SESSION['alert'] === 'Добавлен 1 человек'){
+//         echo $_SESSION['alert'];
+   
+//         unset($_SESSION['alert']);
+// }
+// // echo $_SESSION['alert'];
+// }
+
+
+
 ?>
 
 
